@@ -1,17 +1,20 @@
+
 export default class Team {
   constructor() {
     this.members = new Set();
   }
+  
   add(...heros) {
-    this.members = new Set([...this.members, ...heros]);
+    heros.forEach(hero => this.members.add(hero));
 }
-
-  get() {
+  
+   get() {
     return Array.from(this.members);
   } 
 
   [Symbol.iterator] () {
      const team = this.get()
+     console.log(team)
      const last = team.length;
      let current = 0;
 
@@ -19,6 +22,7 @@ export default class Team {
           next() {
               if ( current < last ) {
                 const value = team[current];
+                console.log(value)
                 current += 1;
                 return { done: false, value: value, };
               } else {
@@ -28,3 +32,4 @@ export default class Team {
       };
   }
 }
+

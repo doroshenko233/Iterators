@@ -66,15 +66,16 @@ test('Правильно создается объект Bowerman', () => {
 
 describe('Тест iterator', () => {
   test('team{Symbol.iterator]', () => {
-      let arrayHeros = [
-          new Bowerman('Nick'),
-          new Swordsman('Nick'),
-          new Magician('Nick'),
-      ]
+    const bowerman = new Bowerman('Nick');
+    const swordsman = new Swordsman('Nick');
+    const magician = new Magician('Nick');
       
-      const team = new Team();
-
-      team.add(arrayHeros);
+    const team = new Team();
+      
+      team.add(bowerman); 
+      team.add(swordsman); 
+      team.add(magician); 
+    
       const expected = [];
 
       for (const hero of team) {
@@ -85,3 +86,14 @@ describe('Тест iterator', () => {
   });
 });
 
+
+test('Magician', () => {
+  const team = new Team();
+  const hero = new Magician('Nick');
+  team.add(hero);
+
+  const iterator = team[Symbol.iterator](); 
+  const expected = iterator.next().value;
+  
+  expect(expected).toEqual(hero);
+})
